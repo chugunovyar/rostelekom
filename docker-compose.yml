@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  rabbit:
+    image: rabbitmq:3.9-management
+    container_name: rabbit
+    hostname: rabbit
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+      - RABBITMQ_DEFAULT_VHOST=/
+    ports:
+      - "5682:5672"
+      - "15682:15672"
+    networks:
+      - shared_network
+  web: 
+    build: .
+    container_name: backend
+    ports: 
+      - '8000:8000'
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - rabbit
+    networks:
+      - shared_network
+networks:
+  shared_network:
+    driver: bridge
