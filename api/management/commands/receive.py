@@ -1,6 +1,6 @@
 import pika
 import json
-from appeal.models import Client, Appeal
+from api.models import Client, Incoming
 from django.core.management.base import BaseCommand
 
 
@@ -13,7 +13,7 @@ def callback(ch, method, properties, body):
         phone=appeal['phone'],
      )
     client.save()
-    appeal_bd = Appeal(description=appeal['message'], client=client)
+    appeal_bd = Incoming(description=appeal['message'], client=client)
     appeal_bd.save()
     print('обращение клиента отправленно в бд')
 

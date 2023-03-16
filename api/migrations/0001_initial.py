@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('description', models.TextField(verbose_name='текст обращения')),
                 ('created', models.DateField(auto_now_add=True, verbose_name='дата создания')),
-                ('client', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='appeals', to='appeal.client', verbose_name='клиент')),
+                ('client', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='appeals', to='api.client', verbose_name='клиент')),
             ],
             options={
                 'ordering': ['-created'],

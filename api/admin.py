@@ -1,16 +1,15 @@
 from django.contrib import admin
-from .models import Appeal, Client
-
+from .models import Incoming, Client
 
 
 class ClientappealInline(admin.TabularInline):
-    model = Appeal
+    model = Incoming
     extra = 1
 
 
-@admin.register(Appeal)
+@admin.register(Incoming)
 class AppealAdmin(admin.ModelAdmin):
-    list_display = ('created','description')
+    list_display = ('created', 'description')
     list_filter = ('created',)
 
 

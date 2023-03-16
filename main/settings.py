@@ -1,23 +1,16 @@
 import os
 from pathlib import Path
-from environs import Env
-from dotenv import load_dotenv
-
-env = Env()
-load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-SECRET_KEY = env(
+SECRET_KEY = (
     'SECRET_KEY',
     'django-insecure-uyaqj#p**p@5&c@==wnvhi$ly1c%ri^x87d^no@d593@r)ox28',
- )
+)
 
-DEBUG = env.bool('DEBUG', True)
+DEBUG = os.getenv('DEBUG', True)
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", ('localhost', '127.0.0.1', '0.0.0.0'))
-
+ALLOWED_HOSTS = ("*",)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -27,9 +20,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'appeal',
-    'phonenumber_field',
+    'api',
     'rest_framework',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -42,7 +35,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'call_service.urls'
+ROOT_URLCONF = 'main.urls'
 
 TEMPLATES = [
     {
@@ -60,8 +53,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'call_service.wsgi.application'
-
+WSGI_APPLICATION = 'main.wsgi.application'
 
 DATABASES = {
     'default': {
@@ -69,7 +61,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -86,7 +77,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Moscow'
@@ -94,7 +84,6 @@ TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 
 USE_TZ = True
-
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
